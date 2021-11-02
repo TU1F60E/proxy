@@ -1,5 +1,7 @@
 export default function Teacher(props) {
   return <>
-    <h1> Teacher! </h1>
+    <div className="hero">
+    <h1> 👮 Teacher! </h1>
+    </div>
   </>
 }

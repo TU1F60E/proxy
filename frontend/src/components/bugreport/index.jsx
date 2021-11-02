@@ -1,5 +1,7 @@
 export default function BugReport(props) {
   return <>
-    <h1> BugReport! </h1>
+    <div className="hero">
+    <h1> 🐛 Bug Report! </h1>
+    </div>
   </>
 }

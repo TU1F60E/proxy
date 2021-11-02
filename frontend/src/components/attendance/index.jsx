@@ -1,5 +1,7 @@
 export default function Attendance(props) {
   return <>
-    <h1> Attendance! </h1>
+    <div className="hero">
+    <h1> 👓 Attendance! </h1>
+    </div>
   </>
 }

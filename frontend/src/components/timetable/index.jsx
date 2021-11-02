@@ -1,5 +1,7 @@
 export default function Timetable(props) {
   return <>
-    <h1> Timetable! </h1>
+    <div className="hero">
+    <h1> 📆 Timetable </h1>
+    </div>
   </>
 }

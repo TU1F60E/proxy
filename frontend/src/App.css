@@ -1,3 +1,12 @@
+:root {
+  --blue: #09175E;
+  --white: #FFF;
+  --lightblue: #00FFFB;
+  --salmon: #EE4266;
+  --black: #000;
+}
+
+
 .App {
   text-align: center;
 }
@@ -35,4 +44,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.hero {
+  text-align: center;
+  font-size: 3rem;
+  padding: 3rem;
+  margin: 3rem;
+  border-radius: 3px;
+  transition: box-shadow 0.4s;
+  border: 1px solid lightblue;
+}
+
+.hero:hover {
+  box-shadow: 3px 3px 3px grey;
+}
+
+.nav {
+  background-color: var(--blue);
 }

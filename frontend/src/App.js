@@ -24,8 +24,8 @@ import MyNavbar from './components/utils/navbar.jsx'
 function App() {
   return (
     <>
-      <MyNavbar/>
       <Router>
+      <MyNavbar/>
         <Switch> 
             <Route path="/" exact>
                 <Home/>

@@ -1,5 +1,7 @@
 export default function AboutUs(props) {
   return <>
-    <h1> AboutUs! </h1>
+    <div className="hero">
+    <h1> 🫂 About Us </h1>
+    </div>
   </>
 }
