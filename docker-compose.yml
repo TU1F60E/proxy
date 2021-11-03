@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+
+  web:
+
+    # restart rules for the container - setting restart to 'always' keeps restarting the container even if it errors out1
+    restart: unless-stopped
+
+    # telling docker-compose where our dockerfile for this service is
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+
+    image: nodejs
+    container_name: nodejs
+
+    ports:
+      - 8000:8000
+
+    volumes:
+      - ./backend:/code
+
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=db
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+
+    networks:
+      - app-network
+
+    depends_on:
+      -  mongo
+
+    command: ["./wait-for.sh", "db:27017", "--", "npm", "start"]
+
+  mongo:
+    image: mongo
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+ mongodb:

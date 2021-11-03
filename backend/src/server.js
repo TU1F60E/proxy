@@ -1,13 +1,35 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
+const {
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+  MONGO_HOSTNAME,
+  MONGO_PORT,
+  MONGO_DB
+} = process.env;
+
+const options = {
+  useNewUrlParser: true,
+  connectTimeoutMS: 10000,
+};
+
 const app = express();
-const port = 9000;
+const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+console.log(
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+  MONGO_HOSTNAME,
+  MONGO_PORT,
+  MONGO_DB,
+  url,
+)
 
-app.get('/', (req, res) => {
-  res.send('<h1> Hello World! </h1>')
+mongoose.connect(url, options).then( function() {
+  console.log('MongoDB is connected');
 })
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+  .catch( function(err) {
+  console.log(err);
+});
 
 
