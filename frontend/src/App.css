@@ -84,7 +84,7 @@ body {
 }
 
 .navbar-link-item {
-    @apply mt-2 lg:mt-0 lg:mx-4 hover:text-gray-800 dark:hover:text-gray-200 text-white p-2 inline;
+    @apply mt-2 lg:mt-0 lg:mx-4 hover:text-gray-800 text-white p-2 inline;
 }
 
 .AppContent {
@@ -123,7 +123,11 @@ body {
 }
 
 .btncontainer {
-  @apply inline-flex;
+  @apply flex flex-row;
+}
+
+.hero-button {
+    @apply px-5 mx-5 flex-1;
 }
 
 .color-logo-blue {
@@ -133,4 +137,9 @@ body {
 .navbarIcon {
   padding: 0.5em;
   margin: 0.5em;
+  @apply px-1;
+}
+
+.btncontainer-vert {
+    @apply flex flex-col;
 }

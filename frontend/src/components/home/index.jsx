@@ -6,7 +6,7 @@ export default function Home(props) {
     <img className="text-center hero-image" src="Pro.png" alt="logo"></img>
     <div className="hero-info">
       <h3 className="hero-text"> The Modern-Day Attendance Management Solution. </h3>
-      <div className="btncontainer">
+        <div className="btncontainer sm:flex-col">
         <button className="hero-button login-button">
           Login <FontAwesomeIcon icon="arrow-right" />
         </button>
