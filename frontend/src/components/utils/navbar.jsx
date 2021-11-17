@@ -39,7 +39,7 @@ export default function MyNavbar() {
 							</div>
 						</div>
 
-						<div class="flex flex-col text-gray-600 capitalize dark:text-gray-300 lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center">
+        <div class="flex flex-col text-gray-600 capitalize dark:text-gray-300 lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center sm:hidden">
 							<Link to="/login" className="navbar-link-item">
 								<FontAwesomeIcon icon="check-square" /> {' '} Login
 							</Link>
@@ -50,16 +50,16 @@ export default function MyNavbar() {
 								<FontAwesomeIcon icon="school"/> Teacher
 							</Link>
 							<Link to="/timetable" className="navbar-link-item">
-								<FontAwesomeIcon icon="calendar"/>Timetable
+								<FontAwesomeIcon icon="calendar"/> Timetable
 							</Link>
 							<Link to="/bugreport" className="navbar-link-item">
-								<FontAwesomeIcon icon="bug"/>Report a Bug
+								<FontAwesomeIcon icon="bug"/> Report a Bug
 							</Link>
 							<Link to="/aboutus" className="navbar-link-item">
-								<FontAwesomeIcon icon="info-circle"/>About Us
+								<FontAwesomeIcon icon="info-circle"/> About Us
 							</Link>
 							<Link to="/me" className="navbar-link-item">
-								<FontAwesomeIcon icon="user"/>Personal Profile
+								<FontAwesomeIcon icon="user"/> Personal Profile
 							</Link>
 							<div class="flex items-center mt-4 md:mt-0">
 								<button

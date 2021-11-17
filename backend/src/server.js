@@ -9,7 +9,8 @@ const {
   MONGO_PASSWORD,
   MONGO_HOSTNAME,
   MONGO_PORT,
-  MONGO_DB
+  MONGO_DB,
+  MONGO_CONNECTION_URL
 } = process.env;
 
 const options = {
@@ -17,7 +18,7 @@ const options = {
   connectTimeoutMS: 10000,
 };
 
-const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+const url = MONGO_CONNECTION_URL;
 
 mongoose.connect(url, options)
     .then(function() {
@@ -30,7 +31,7 @@ mongoose.connect(url, options)
 const port = 8000
 const app = express();
 
-// BODY PARSERS - basic input sanitization
+// BODY PARSERS - basic input sanitization as HTTP request middleware.
 // parse application/x-www-form-urlencoded
 app.use(bodyparser.urlencoded({ extended: false }))
 // parse application/json

@@ -29,32 +29,5 @@ services:
       - MONGO_PORT=$MONGO_PORT
       - MONGO_DB=$MONGO_DB
 
-    networks:
-      - app-network
 
-    depends_on:
-      -  mongo
-
-    command: ["./wait-for.sh", "db:27017", "--", "npm", "start"]
-
-  mongo:
-    image: mongo
-    container_name: db
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodb:/data/db
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
-
-volumes:
- mongodb:
+    command: ["npm", "start"]
