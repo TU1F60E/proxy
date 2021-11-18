@@ -24,7 +24,6 @@ Classes
     |   |- average_absent_rate
     |   |- normalized_decimal_present
     |   |- normalized_decimal_absent
-    |   |- moving_average
 Sessions
     |- Class
     |- [Report]
