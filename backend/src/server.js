@@ -3,13 +3,9 @@ const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 
 const UserRouter = require('./users/urls.js');
+const ClassRouter = require('./classes/urls.js');
 
 const {
-  MONGO_USERNAME,
-  MONGO_PASSWORD,
-  MONGO_HOSTNAME,
-  MONGO_PORT,
-  MONGO_DB,
   MONGO_CONNECTION_URL
 } = process.env;
 
@@ -40,6 +36,7 @@ app.use(bodyparser.json())
 
 // ROUTE REGISTRATION
 app.use('/users', UserRouter);
+app.use('/classes', ClassRouter);
 
 app.listen(port, () => {
   console.log(`Example app is now listening on http://localhost:${port}`)

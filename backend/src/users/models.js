@@ -37,7 +37,7 @@ const UserSchema = new Schema({
 UserSchema.statics.getByUID = (UID) => {
     return new Promise((resolve, reject) => {
 
-        mongoose.model('User').findById(UID)
+        mongoose.model('User').findById(UID).lean()
             .then(response => {
                 console.log("Successful! Repsonse => ", response);
                 resolve(response);
@@ -55,7 +55,7 @@ UserSchema.statics.getAll = () => {
     return new Promise((resolve, reject) => {
 
         // blanket fetch all objects
-        mongoose.model('User').find({})
+        mongoose.model('User').find({}).lean()
             .then(response => {
                 console.log("Successful! Repsonse => ", response);
                 resolve(response);
@@ -89,5 +89,5 @@ UserSchema.statics.CreateOne = (proposed_user) => {
 
 
 var User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = {User, UserSchema};
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const { User, ClassSchema } = require('../users/models.js');
+const { User, UserSchema } = require('../users/models.js');
 
 /*
     * embedded schema transactions are atomic - no save() called on
@@ -12,13 +12,13 @@ const ClassSchema = new Schema({
     // name of the class
     name: String,
     // list of all the teachers in the class - all have a type of TEACHER
-    teachers: [User],
+    teachers: [UserSchema],
     // list of all the students in the class - all have a type of STUDENT
-    students: [User],
+    students: [UserSchema],
     // latest session - perhaps an ID?
     latest_session: String,
     // average attenance in this class
-    average_attendance: Float,
+    average_attendance: Number,
     // report - don't re-fetch and recalc for status views
     latest_report: String,
     created: {type: Date, default: Date.now},
@@ -48,7 +48,7 @@ ClassSchema.statics.getAll = () => {
     return new Promise((resolve, reject) => {
 
         // blanket fetch all objects
-        mongoose.model('Class').find({})
+        mongoose.model('Class').find({}).lean()
             .then(response => {
                 console.log("Successful! Repsonse => ", response);
                 resolve(response);
@@ -65,7 +65,7 @@ ClassSchema.statics.CreateOne = (proposed_class) => {
 
     return new Promise((resolve, reject) => {
         // Create a new Object from the `proposed_user` JSON.
-        mongoose.model('User').create(proposed_user)
+        mongoose.model('Class').create(proposed_class)
             .then(response => {
                 console.log("Successful! Repsonse => ", response);
                 resolve(response);
@@ -78,10 +78,27 @@ ClassSchema.statics.CreateOne = (proposed_class) => {
 }
 
 // function to add a student to a class
-ClassSchema.statics.AddStudentToClass = async (student_id, class_id) => {
+ClassSchema.statics.AddStudentToClass = (student_id, class_id) => {
 
-    const student_ref = await mongoose.model('User').findById(student_id);
-
+    return new Promise((resolve, reject) => {
+        mongoose.model('Class').findById(class_id)
+            .then(class_instance => {
+                // now find the student
+                mongoose.model('User').getByUID(student_id)
+                    .then(student_response => {
+                        class_instance.students.push(student_response);
+                        class_instance.save()
+                        resolve(class_instance)
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        reject(error);
+                    })
+            })
+            .catch(error => {
+                reject(error);
+            })
+    })
 }
 
 var Class = mongoose.model('Class', ClassSchema);

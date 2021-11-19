@@ -3,12 +3,12 @@
     * URL, as functions. We then register the functions we defined here
     * with a route and HTTP Verb, as found in the Routes file.
 */
-const UserModel = require('./models.js');
+const { User } = require('./models.js');
 const bodyparser = require('body-parser');
 
 function getAllUsers(req, res)
 {
-    UserModel.getAll()
+    User.getAll()
         .then(response => {
             res.type('json').send(response);
         })
@@ -24,7 +24,7 @@ function createUser(req, res)
     // parse the request body to get the user information
     // console.log(req.body);
 
-    UserModel
+    User
         .CreateOne(req.body)
         .then(response => {
             res.type('json').send(response)
