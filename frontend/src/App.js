@@ -19,6 +19,7 @@ import {
     faCalendarAlt,
 	faCalendar,
     faArrowRight,
+	faHome,
 
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -48,8 +49,8 @@ library.add(
 	faUser,
 	faCalendarAlt,
 	faCalendar,
-	faArrowRight
-
+	faArrowRight,
+	faHome,
 )
 
 function App() {
