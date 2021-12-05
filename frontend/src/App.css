@@ -125,3 +125,23 @@ body {
 .nav-link {
   @apply text-white text-xl;
 }
+
+.action_menu {
+  @apply flex flex-col p-5 m-5 text-center;
+}
+
+.action_menu > a {
+  @apply bg-blue-500 p-3 m-3 flex-1 w-full text-white;
+}
+
+form {
+  @apply flex flex-col m-4;
+}
+
+form > input {
+  @apply p-3 m-3 border-b-4 border-blue-700;
+}
+
+.std_btn {
+  @apply bg-blue-700 text-white p-3 m-3 ;
+}

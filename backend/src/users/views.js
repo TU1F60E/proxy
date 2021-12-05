@@ -3,8 +3,10 @@
     * URL, as functions. We then register the functions we defined here
     * with a route and HTTP Verb, as found in the Routes file.
 */
-const UserModel = require('./models.js');
+const { User } = require('./models.js');
 const bodyparser = require('body-parser');
+
+var UserModel = User;
 
 function getAllUsers(req, res)
 {

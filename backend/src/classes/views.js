@@ -39,7 +39,7 @@ function createClass(req, res)
     ClassModel
         .CreateOne(req.body)
         .then(response => {
-            res.status(400).type('json').send(response)
+            res.status(200).type('json').send(response)
         })
         .catch(error => {
             res.status(400).type('json').send(error)
