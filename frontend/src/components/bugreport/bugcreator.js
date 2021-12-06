@@ -1,16 +1,16 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 
-const ClassCreator = () => (
+const BugCreator = () => (
   <div>
     <Formik
       initialValues={
         { 
-          name: '',
+          bug: '',
         }
       }
       onSubmit={(values, { setSubmitting }) => {
-        axios.post('http://localhost:8000/classes/', values)
+        axios.post('http://localhost:8000/bug-report/', values)
           .then(response => {
             console.log(response);
           })
@@ -22,11 +22,11 @@ const ClassCreator = () => (
       {({ isSubmitting }) => (
         <Form>
 
-          <Field type="text" name="name" placeholder="Name of the New Class"/>
-          <ErrorMessage name="name" component="div" />
+          <Field type="text" name="bug" placeholder="Issue faced"/>
+          <ErrorMessage name="bug" component="div" />
 
           <button className="std_btn" type="submit" disabled={isSubmitting}>
-            Create A New Class!
+            Bug report noted!
           </button>
 
         </Form>
@@ -36,4 +36,4 @@ const ClassCreator = () => (
   </div>
 );
 
-export default ClassCreator;
+export default BugCreator;

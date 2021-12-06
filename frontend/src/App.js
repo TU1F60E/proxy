@@ -37,6 +37,7 @@ import PersonalProfile from './components/home/personalprofile.jsx'
 import AboutUs from './components/utils/aboutus.jsx'
 import StudentManager from './components/home/student_manager.js'
 import ClassManager from './components/home/class_manager.js'
+import BugManager from './components/bugreport/bug_manager.js'
 
 import MyNavbar from './components/utils/navbar.jsx'
 
@@ -85,6 +86,9 @@ function App() {
 					</Route>
 					<Route path="/bugreport" exact>
 						<BugReport />
+					</Route>
+					<Route path="/bug-report" exact>
+						<BugManager />
 					</Route>
 					<Route path="/aboutus" exact>
 						<AboutUs />
