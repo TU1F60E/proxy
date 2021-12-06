@@ -46,6 +46,36 @@ UserSchema.statics.getByUID = (UID) => {
     })
 }
 
+// method to delete a user by the UID
+UserSchema.statics.DeleteByUID = (UID) => {
+    return new Promise((resolve, reject) => {
+        mongoose.model('User').findByIdAndDelete(UID)
+            .then(response => {
+                console.log("Successful! Repsonse => ", response);
+                resolve(response);
+            })
+            .catch(error => {
+                console.error("Error! => ", error);
+                reject(error);
+            })
+    })
+}
+
+// method to update by the UID
+UserSchema.statics.updateOne = (UID, data) => {
+    return new Promise((resolve, reject) => {
+        mongoose.model('User').findByIdAndUpdate(UID, data)
+            .then(response => {
+                console.log("Successful! Repsonse => ", response);
+                resolve(response);
+            })
+            .catch(error => {
+                console.error("Error! => ", error);
+                reject(error);
+            })
+    })
+}
+
 // method to get all the students
 UserSchema.statics.getAll = () => {
     return new Promise((resolve, reject) => {

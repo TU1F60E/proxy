@@ -18,7 +18,45 @@ function getAllUsers(req, res)
 
 function getOneUser(req, res)
 {
-    res.send("Single User!");
+    var user_id = req.params.user_id;
+    UserModel.getByUID(user_id)
+        .then(response => {
+            res.status(200).type('json').send(response);
+        })
+        .catch(error => {
+            res.status(400).type('json').send(error);
+        })
+}
+
+function deleteOneUser(req, res)
+{
+    var user_id = req.params.user_id;
+    UserModel.DeleteByUID(user_id)
+        .then(response => {
+            res.status(200).type('json').send(response);
+        })
+        .catch(error => {
+            res.status(400).type('json').send(error);
+        })
+}
+
+function updateOneUser(req, res) {
+  // function to update one user
+  // var user_id = req.params.user_id;
+  // var update_info = req.body;
+  console.log("In the update method now..");
+  console.log(req.params.user_id, req.body);
+  UserModel.updateOne(
+    req.params.user_id, 
+    req.body,
+    options = {returnDocument: 'after'},
+  )
+    .then(response => {
+      res.status(200).type('json').send(response)
+    })
+    .catch(error => {
+      res.status(400).type('json').send(error)
+    })
 }
 
 function createUser(req, res)
@@ -40,4 +78,6 @@ module.exports =  {
     getAllUsers,
     getOneUser,
     createUser,
+    updateOneUser,
+    deleteOneUser,
 }

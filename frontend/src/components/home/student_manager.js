@@ -1,5 +1,8 @@
 import Modal from '../utils/modal.js'
 import Hero from '../utils/hero.jsx';
+import UserCreator from './usercreator.jsx'
+import UserModifier from './studentmodifier.jsx'
+import UserDeleter from './studentdeleter.jsx'
 import { useState, useEffect } from 'react';
 import DataGrid from 'react-data-grid';
 import axios from 'axios';
@@ -8,7 +11,7 @@ export default function StudentManager(props) {
 
   var [users, setUsers] = useState();
   var [error, setError] = useState([]);
-  
+
   // grid setup
   const columns = [
     {key: '_id', name: 'ID'},
@@ -42,7 +45,10 @@ export default function StudentManager(props) {
               header_icon="home" 
               button_icon="shield"
             >
-              <p> hello, modal! </p>
+            {
+              // create user
+            }
+              <UserCreator/>
           </Modal>
 
             <Modal 
@@ -52,7 +58,23 @@ export default function StudentManager(props) {
               header_icon="home" 
               button_icon="pluscircle"
             >
-              <p> hello, modal! </p>
+            {
+              // delete and or update a user
+            }
+              <UserModifier students={users}/>
+          </Modal>
+
+          <Modal 
+              classname="p-3 m-3 flex-grow w-full" 
+              buttonName="Delete Student" 
+              title="Modify and Existing Student!" 
+              header_icon="home" 
+              button_icon="pluscircle"
+            >
+            {
+              // delete and or update a user
+            }
+              <UserDeleter students={users}/>
           </Modal>
 
         </div>

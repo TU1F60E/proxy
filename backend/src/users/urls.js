@@ -8,8 +8,10 @@ var UserRouter = express.Router();
 // we can also have parametric URLs
 UserRouter
     .get("/", views.getAllUsers)
-    .get("/:id", views.getOneUser)
     .post("/", views.createUser)
+    .get("/:user_id", views.getOneUser)
+    .patch("/:user_id", views.updateOneUser)
+    .delete("/:user_id", views.deleteOneUser)
 
 // make this router available to the outer world
 module.exports = UserRouter;
