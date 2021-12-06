@@ -1,26 +1,26 @@
 import Modal from '../utils/modal.js'
 import Hero from '../utils/hero.jsx';
-import ClassCreator from './classcreator'
+import BugCreator from './bugcreator'
 import { useState, useEffect } from 'react';
 import DataGrid from 'react-data-grid';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-export default function ClassManager(props) {
+export default function BugManager(props) {
 
   var [users, setUsers] = useState();
   var [error, setError] = useState([]);
   
   // grid setup
-  const columns = [ 
+  const columns = [
     {key: '_id', name: 'ID'},
     {key: 'created', name: 'Created At'},
-    {key: 'name', name: 'Name'},
+    {key: 'bug', name: 'Issue Faced'},
   ]
 
   useEffect(() => {
     // fetch data on component render
-    axios.get("http://localhost:8000/classes/")
+    axios.get("http://localhost:8000/bug-report/")
       .then(response => {
         // console.log(response);
         console.log("fetching data...");
@@ -33,42 +33,28 @@ export default function ClassManager(props) {
   }, [])
 
   return <>
-    <Hero title="Classes" className="border border-green-500">
+    <Hero title="Bug Report" className="border border-green-500">
 
         <div className="button-row flex flex-wrap justify-items-stretch w-full">
 
             <Modal 
               classname="p-3 m-3 flex-grow w-full " 
-              buttonName="Create Class" 
-              title="create a new class" 
+              buttonName="Report Bug" 
+              title="Report the issue faced" 
               header_icon="home" 
               button_icon="shield"
             >
               {
-                  // class creation logic goes here
+                  // Bug creation logic goes here
               }
-              <ClassCreator/>
+              <BugCreator/>
           </Modal>
-
-            <Modal 
-              classname="p-3 m-3 flex-grow w-full" 
-              buttonName="Modify a Class" 
-              title="Modify an Existing Class" 
-              header_icon="home" 
-              button_icon="pluscircle"
-            >
-              {
-                  // class update/deletion logic goes here
-              }
-              <p> hello, modal! </p>
-          </Modal>
-
         </div>
 
         <br/>
 
         {
-          // this sucks man
+          // this sucks man 
           // least convenient way of adding comments
         }
 
