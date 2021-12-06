@@ -17,8 +17,13 @@ export default function MyNavbar() {
 
 				<div className="navbar-links flex md:flex-row lg:flex-row flex-col w-3/5 self-center sm:flex-col mx-3">
 					<div className="nav-link flex-1">
-						<Link to="/">
-							<FontAwesomeIcon icon="home" /> Home{" "}
+						<Link to="/student">
+							<FontAwesomeIcon icon="home" /> Student{" "}
+						</Link>
+					</div>
+					<div className="nav-link flex-1">
+						<Link to="/teacher">
+							<FontAwesomeIcon icon="home" /> Teacher{" "}
 						</Link>
 					</div>
 					<div className="nav-link flex-1">
@@ -33,15 +38,6 @@ export default function MyNavbar() {
 							{" "}
 							<FontAwesomeIcon className="nav-icon" icon="check-square" /> Bug
 							Report{" "}
-						</Link>
-					</div>
-					<div className="nav-link flex-1">
-						<Link to="/timetable">
-							{" "}
-							<FontAwesomeIcon
-								className="nav-icon"
-								icon="calendar"
-							/> Records{" "}
 						</Link>
 					</div>
 				</div>

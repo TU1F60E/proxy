@@ -1,7 +1,14 @@
+import {Link} from 'react-router-dom'
+import Hero from '../utils/hero.jsx'
+
 export default function Student(props) {
   return <>
-    <div className="hero">
-    <h1> 🙎 Student! </h1>
-    </div>
+        <Hero title="Student">
+
+          <div className="action_menu">
+            <Link to="/student_attendance"> <button> Give Attendance </button> </Link>
+          </div>
+
+        </Hero>
   </>
 }

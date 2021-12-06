@@ -1,7 +1,9 @@
+import Hero from '../utils/hero.jsx'
+
 export default function BugReport(props) {
   return <>
-    <div className="hero">
-    <h1> 🐛 Bug Report! </h1>
-    </div>
+    <Hero title="Bug Report" className="text-center">
+    <p className="text-3xl text-underline"> have you encountered a bug? let us know! </p>
+    </Hero>
   </>
 }

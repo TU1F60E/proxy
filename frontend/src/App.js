@@ -16,13 +16,13 @@ import {
 	faBug,
 	faInfoCircle,
 	faUser,
-    faCalendarAlt,
+	faCalendarAlt,
 	faCalendar,
-    faArrowRight,
+	faArrowRight,
 	faHome,
+    faPlusCircle,
 
 } from '@fortawesome/free-solid-svg-icons'
-
 
 
 // import all our components
@@ -35,6 +35,8 @@ import Timetable from './components/timetable/index.jsx'
 import BugReport from './components/bugreport/index.jsx'
 import PersonalProfile from './components/home/personalprofile.jsx'
 import AboutUs from './components/utils/aboutus.jsx'
+import StudentManager from './components/home/student_manager.js'
+import ClassManager from './components/home/class_manager.js'
 
 import MyNavbar from './components/utils/navbar.jsx'
 
@@ -51,6 +53,7 @@ library.add(
 	faCalendar,
 	faArrowRight,
 	faHome,
+	faPlusCircle,
 )
 
 function App() {
@@ -85,6 +88,20 @@ function App() {
 					</Route>
 					<Route path="/aboutus" exact>
 						<AboutUs />
+					</Route>
+					<Route path="/studentmanager" exact>
+						<StudentManager />
+					</Route>
+					<Route path="/classmanager" exact>
+						<ClassManager />
+					</Route>
+					<Route path="/teacher_attendance" exact>
+						<h1> Teacher Attendance Starter </h1>
+						<Home />
+					</Route>
+					<Route path="/student_attendance" exact>
+						<h1> Student Attendance Starter </h1>
+						<Home />
 					</Route>
 				</Switch>
 			</Router>

@@ -6,10 +6,8 @@ const getUsers = state => state.users
 
 export default function Auth(props) {
 
-  const users = useSelector(getUsers);
-
   return <>
-  <div class="hero">
+  <div className="hero">
     <div className="hero-info">
       <h3 className="hero-text"> Users </h3>
         <div className="btncontainer sm:flex-col">
@@ -17,11 +15,6 @@ export default function Auth(props) {
               Create <FontAwesomeIcon icon="arrow-right" />
             </button>
         </div>
-      <ul>
-      {users && users.map(user => {
-        return <li key={user.id}> {user.name} hi </li>
-      })}
-      </ul>
     </div>
   </div>
   </>
