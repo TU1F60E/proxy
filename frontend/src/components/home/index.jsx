@@ -6,28 +6,28 @@ import Modal from '../utils/modal.js'
 export default function Home(props) {
   return <>
     <Hero title="Proxy">
-      {
-        // Make this a nice landing page
-      }
       <h2 className="text-3xl m-3 p-3 "> Proxy is a Modern-Day Attendance Management System. </h2>
-      {/* <div style="text-align:center;"> */}
 
-      {/* <style>
-        svg {
-          display: block;
-        margin-left: auto;
-        margin-right: auto;
-}
-      </style> */}
+      <p>
+        Get added to a class...
+        Give your attendance...
+        Track your attendance...
+      </p>
+      <br/>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum quaerat possimus dolores itaque? Tenetur molestias ad minus<br/> optio, ipsum nemo voluptatum necessitatibus assumenda eum maxime, totam ea minima aliquid asperiores.</p>
 
-      {/* .container {display: flex;   justify-content: center; } */}
-
-      <svg class width="200" height="200"
-        xmlns="http://www.w3.org/2000/svg">
-          {/* //className="h-70" */}
-        {/* <svg class="h-70 w-70" viewBox="0 0 5 5"> */}
-        <image href="logo_darkblue.png" height="200" width="200" />
-      </svg>
+      <div class="main">
+        <div><img src="browser.svg" /></div>
+        <div>
+          <br/>
+          <br/>
+          <h1 className="text-3x m-3 p-3">
+             Hi hello! this is testing for flex wrap property.<br/>
+             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa minus explicabo rerum quasi, ipsum totam! Pariatur,<br/> nesciunt! Assumenda laborum numquam illo beatae, nisi, et autem ab, quisquam quam maiores nihil.<br/>
+          </h1>
+          </div>
+          {/* <div><img src="study.svg" /></div> */}
+      </div>
 
     </Hero>
   </>
