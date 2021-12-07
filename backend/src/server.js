@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const UserRouter = require('./users/urls.js');
 const ClassRouter = require('./classes/urls.js');
+const BugRouter= require('./bugs/urls.js');
 
 const {
   MONGO_USERNAME,
@@ -44,6 +45,7 @@ app.use(bodyparser.json())
 // ROUTE REGISTRATION
 app.use('/users', UserRouter);
 app.use('/classes', ClassRouter);
+app.use('/bug-report', BugRouter);
 
 app.listen(port, () => {
   console.log(`Example app is now listening on http://localhost:${port}`)
