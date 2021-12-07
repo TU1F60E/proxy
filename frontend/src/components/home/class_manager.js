@@ -9,7 +9,36 @@ import ClassUpdater from './class_updator.js'
 import ClassDeleter from './class_deleter.jsx'
 import ClassStudentUtils from './class_student_utils'
 
+import StudentTableView from '../utils/student_table.jsx';
 import ClassTableView from '../utils/class_table.jsx';
+
+function ClassRow(props) {
+
+  var [showChild, setShowChild] = useState(false);
+
+  function toggleShowChild() {
+    setShowChild(!showChild);
+  }
+
+  return <>
+        <div> 
+        <p className="text-2xl p-3 m-5 text-blue-500 rounded shadow-sm underline" onClick={toggleShowChild}> {props.class_in.name}</p>
+    {(props.class_in.students.length > 0 && showChild) && <StudentTableView students={props.class_in.students}/>}
+        </div>
+  </>
+}
+
+function ClassTableViewLocal(props) {
+  // render the list of User IDs in a Modal for this class
+
+  return <>
+  <div className="class_list flex flex-col">
+    {props.classes.map((i, pclass) => {
+      return <ClassRow class_in={i} key={i._id} />
+    }) }
+  </div>
+  </>
+}
 
 export default function ClassManager(props) {
 
@@ -116,9 +145,11 @@ export default function ClassManager(props) {
           <button className="std_btn" onClick={refresh}> Refresh </button>
 
         </div>
-
         <br/>
-        <ClassTableView students={classes} />
+          {
+            classes && 
+            <ClassTableViewLocal classes={classes} />
+          }
     </Hero>
   </>
 }

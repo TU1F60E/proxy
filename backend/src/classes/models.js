@@ -46,18 +46,31 @@ ClassSchema.statics.getByUID = (UID) => {
 
 // method to get all the students
 ClassSchema.statics.getAll = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise( async (resolve, reject) => {
 
         // blanket fetch all objects
         mongoose.model('Class').find({}).lean()
-            .then(response => {
+            .then(async response => {
                 console.log("Successful! Repsonse => ", response);
                 // hydrate the response student fields with their objects
-                var i = 0;
-                for (i = 0; i < response.students.length; i++){
-                  // fetch the user object
-                  // response.students[i] = 
+                //TODO later
+                if (response) {
+                  response_new = await Promise.all(response.map( async response1 => {
+                    // var students = response1.students
+                    console.log("Current class is ", response1);
+                    console.log("Current class is has the students", response1.students);
+                    // iterate through all the students, hydrate
+                    console.log("fetching students...")
+                    response1.students = await mongoose.model('User').find({ 
+                      _id : { 
+                        $in: response1.students
+                      }
+                    });
+                    console.log(response1)
+                    return response1;
+                  }))
                 }
+                console.log("hydrated >> ", response);
                 resolve(response);
             })
             .catch(error => {
@@ -93,7 +106,8 @@ ClassSchema.statics.AddStudentToClass = (student_id, class_id) => {
                 // now find the student
                 mongoose.model('User').getByUID(student_id)
                     .then(student_response => {
-                        class_instance.students.push(student_response._id);
+                        // spaghetti - push if does not exist
+                      class_instance.students.indexOf(student_response._id) === -1 ?  class_instance.students.push(student_response._id) : console.log("Student already exists in Class, not pushing.");
                         class_instance.save()
                         resolve(class_instance)
                     })
