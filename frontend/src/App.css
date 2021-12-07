@@ -142,6 +142,10 @@ form > input {
   @apply p-3 m-3 border-b-4 border-blue-700;
 }
 
+form > select {
+  @apply p-3 m-3 border-b-4 border-blue-700 bg-blue-100;
+}
+
 .std_btn {
   @apply bg-blue-700 text-white p-3 m-3 ;
 }

@@ -64,9 +64,40 @@ function AddUserToClass(req, res)
         })
 }
 
+function UpdateClass(req, res) {
+  var class_id = req.params.class_id;
+  console.log("In the update method now..");
+  console.log(req.params.class_id, req.body);
+
+  ClassModel.UpdateClass(
+    class_id, 
+    req.body,
+    options = {returnDocument: 'after'},
+  )
+    .then(response => {
+      res.status(200).type('json').send(response)
+    })
+    .catch(error => {
+      res.status(400).type('json').send(error)
+    })
+}
+
+function DeleteClass(req, res) {
+    var class_id = req.params.class_id;
+    ClassModel.DeleteClass(class_id)
+        .then(response => {
+            res.status(200).type('json').send(response);
+        })
+        .catch(error => {
+            res.status(400).type('json').send(error);
+        })
+}
+
 module.exports =  {
     getAllClasses,
     getOneClass,
     createClass,
     AddUserToClass,
+    UpdateClass,
+    DeleteClass
 }

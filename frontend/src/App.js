@@ -38,6 +38,7 @@ import AboutUs from './components/utils/aboutus.jsx'
 import StudentManager from './components/home/student_manager.js'
 import ClassManager from './components/home/class_manager.js'
 import BugManager from './components/bugreport/bug_manager.js'
+import TeacherAttendanceControl from './components/home/teacher_attendance.jsx'
 
 import MyNavbar from './components/utils/navbar.jsx'
 
@@ -70,9 +71,7 @@ function App() {
 						<Attendance />
 					</Route>
 					<Route path="/login">
-						<Auth />
-					</Route>
-					<Route path="/student" exact>
+						<Auth /> </Route> <Route path="/student" exact>
 						<Student />
 					</Route>
 					<Route path="/teacher" exact>
@@ -100,8 +99,7 @@ function App() {
 						<ClassManager />
 					</Route>
 					<Route path="/teacher_attendance" exact>
-						<h1> Teacher Attendance Starter </h1>
-						<Home />
+						<TeacherAttendanceControl />
 					</Route>
 					<Route path="/student_attendance" exact>
 						<h1> Student Attendance Starter </h1>
