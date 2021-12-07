@@ -150,3 +150,11 @@ form > select {
   @apply bg-blue-700 text-white p-3 m-3 ;
 }
 
+.table, th, td {
+  border: 2px black;
+  border-style: solid;
+}
+td {
+  width: 100px;
+  height: 50px;
+}
