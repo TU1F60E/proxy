@@ -6,13 +6,9 @@ const cors = require('cors');
 const UserRouter = require('./users/urls.js');
 const ClassRouter = require('./classes/urls.js');
 const BugRouter= require('./bugs/urls.js');
+const AttendanceRouter= require('./attendance/urls.js');
 
 const {
-  MONGO_USERNAME,
-  MONGO_PASSWORD,
-  MONGO_HOSTNAME,
-  MONGO_PORT,
-  MONGO_DB,
   MONGO_CONNECTION_URL
 } = process.env;
 
@@ -46,6 +42,7 @@ app.use(bodyparser.json())
 app.use('/users', UserRouter);
 app.use('/classes', ClassRouter);
 app.use('/bug-report', BugRouter);
+app.use('/attendance', AttendanceRouter);
 
 app.listen(port, () => {
   console.log(`Example app is now listening on http://localhost:${port}`)

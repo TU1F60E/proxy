@@ -10,7 +10,7 @@ const AttendanceCreator = (props) => (
         }
       }
       onSubmit={(values, { setSubmitting }) => {
-        axios.post('http://localhost:8000/classes/', values)
+        axios.post('http://localhost:8000/attendance/', {class_id: values._id})
           .then(response => {
             console.log(response);
           })

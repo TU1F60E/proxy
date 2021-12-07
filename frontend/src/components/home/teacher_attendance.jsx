@@ -5,6 +5,32 @@ import Modal from '../utils/modal.js'
 import Hero from '../utils/hero.jsx';
 import AttendanceCreator from './attendancecreator.jsx'
 
+function AttRow(props) {
+
+  var [showChild, setShowChild] = useState(false);
+
+  function toggleShowChild() {
+    setShowChild(!showChild);
+  }
+
+  return <>
+        <div> 
+        <p className="text-2xl p-3 m-5 text-blue-500 rounded shadow-sm underline" onClick={toggleShowChild}> {`${props.att_session.class} (${props.att_session.created})`}</p>
+          {props.att_session.attendance && <>
+            <table>
+            {Object.keys(props.att_session.attendance).map(item => {
+              return <>
+              <tr>
+                <td> {item} </td>
+                <td> {props.att_session.attendance[item] == true ? "Present" : "absent"} </td>
+              </tr>
+              </>
+            })}
+            </table>
+          </>}
+        </div>
+  </>
+}
 
 export default function TeacherAttendanceControl(props) {
 
@@ -31,17 +57,17 @@ export default function TeacherAttendanceControl(props) {
       axios.get("http://localhost:8000/attendance/")
         .then(response => {
           // console.log(response);
-          console.log("fetching data...");
+          console.log("fetching data...", response);
           setAttSessions(response.data);
         })
         .catch(error => {
-          setClasses([]);
+          setAttSessions([]);
           setError(error);
         })
   }
 
   function refresh() {
-    // fetchAttendance();
+    fetchAttendance();
     fetchClasses();
   }
 
@@ -73,9 +99,11 @@ export default function TeacherAttendanceControl(props) {
 
         <br/>
 
-          <div className="AttendanceSessionViewer">
-
-          </div>
+        <div className="AttendanceSessionViewer">
+          {att_sessions && att_sessions.map(a => {
+            return <AttRow att_session={a}/>
+          })}
+        </div>
 
     </Hero>
   </>

@@ -39,6 +39,7 @@ import StudentManager from './components/home/student_manager.js'
 import ClassManager from './components/home/class_manager.js'
 import BugManager from './components/bugreport/bug_manager.js'
 import TeacherAttendanceControl from './components/home/teacher_attendance.jsx'
+import StudentAttendanceControl from './components/home/student_attendance.jsx'
 
 import MyNavbar from './components/utils/navbar.jsx'
 
@@ -102,8 +103,7 @@ function App() {
 						<TeacherAttendanceControl />
 					</Route>
 					<Route path="/student_attendance" exact>
-						<h1> Student Attendance Starter </h1>
-						<Home />
+						<StudentAttendanceControl />
 					</Route>
 				</Switch>
 			</Router>
