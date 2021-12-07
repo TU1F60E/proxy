@@ -6,10 +6,11 @@ const BugCreator = () => (
     <Formik
       initialValues={
         { 
-          bug: '',
+          bugs: '',
         }
       }
       onSubmit={(values, { setSubmitting }) => {
+        console.log(values)
         axios.post('http://localhost:8000/bug-report/', values)
           .then(response => {
             console.log(response);
@@ -22,11 +23,11 @@ const BugCreator = () => (
       {({ isSubmitting }) => (
         <Form>
 
-          <Field type="text" name="bug" placeholder="Issue faced"/>
-          <ErrorMessage name="bug" component="div" />
+          <Field type="text" name="bugs" placeholder="Issue faced"/>
+          <ErrorMessage name="bugs" component="div" />
 
-          <button className="std_btn" type="submit" disabled={isSubmitting}>
-            Bug report noted!
+          <button className="std_btn" type="submit" enabled={isSubmitting}>
+            Submit
           </button>
 
         </Form>

@@ -8,14 +8,14 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 export default function BugManager(props) {
 
-  var [users, setUsers] = useState();
+  var [bugs, setBugs] = useState();
   var [error, setError] = useState([]);
   
   // grid setup
   const columns = [
     {key: '_id', name: 'ID'},
     {key: 'created', name: 'Created At'},
-    {key: 'bug', name: 'Issue Faced'},
+    {key: 'bugs', name: 'Issue Faced'},
   ]
 
   useEffect(() => {
@@ -24,10 +24,10 @@ export default function BugManager(props) {
       .then(response => {
         // console.log(response);
         console.log("fetching data...");
-        setUsers(response.data);
+        setBugs(response.data);
       })
       .catch(error => {
-        setUsers([]);
+        setBugs([]);
         setError(error);
       })
   }, [])
@@ -53,16 +53,11 @@ export default function BugManager(props) {
 
         <br/>
 
-        {
-          // this sucks man 
-          // least convenient way of adding comments
+        {bugs && 
+          <DataGrid columns={columns} rows={bugs} className="w-full m-3"/>
         }
-
-        {users && 
-          <DataGrid columns={columns} rows={users} className="w-full m-3"/>
-        }
-        {!users && 
-          <h3> Could not find users :( </h3>
+        {!bugs && 
+          <h3> Could not find bugs :( </h3>
         }
 
     </Hero>
