@@ -1,23 +1,18 @@
-import Modal from '../utils/modal.js'
-import Hero from '../utils/hero.jsx';
-import UserCreator from './usercreator.jsx'
-import UserModifier from './studentmodifier.jsx'
-import UserDeleter from './studentdeleter.jsx'
 import { useState, useEffect } from 'react';
 import DataGrid from 'react-data-grid';
 import axios from 'axios';
+
+import Modal from '../utils/modal.js'
+import Hero from '../utils/hero.jsx';
+import StudentTableView from '../utils/student_table.jsx'
+import UserCreator from './usercreator.jsx'
+import UserModifier from './studentmodifier.jsx'
+import UserDeleter from './studentdeleter.jsx'
 
 export default function StudentManager(props) {
 
   var [users, setUsers] = useState();
   var [error, setError] = useState([]);
-
-  // grid setup
-  const columns = [
-    {key: '_id', name: 'ID'},
-    {key: 'SRN', name: 'SRN'},
-    {key: 'name', name: 'Name'},
-  ]
 
   useEffect(() => {
     // fetch data on component render
@@ -85,14 +80,7 @@ export default function StudentManager(props) {
           // this sucks man
           // least convenient way of adding comments
         }
-
-        {users && 
-          <DataGrid columns={columns} rows={users} className="w-full m-3"/>
-        }
-        {!users && 
-          <h3> Could not find users :( </h3>
-        }
-
+        <StudentTableView students={users} />
     </Hero>
   </>
 }

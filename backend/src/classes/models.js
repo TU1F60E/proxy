@@ -12,9 +12,10 @@ const ClassSchema = new Schema({
     // name of the class
     name: String,
     // list of all the teachers in the class - all have a type of TEACHER
-    teachers: [UserSchema],
+    // teachers: [UserSchema],
     // list of all the students in the class - all have a type of STUDENT
-    students: [UserSchema],
+    // instead of storing the Entire student, just store the ID
+    students: [Schema.Types.ObjectId],
     // latest session - perhaps an ID?
     latest_session: String,
     // average attenance in this class
@@ -51,6 +52,12 @@ ClassSchema.statics.getAll = () => {
         mongoose.model('Class').find({}).lean()
             .then(response => {
                 console.log("Successful! Repsonse => ", response);
+                // hydrate the response student fields with their objects
+                var i = 0;
+                for (i = 0; i < response.students.length; i++){
+                  // fetch the user object
+                  // response.students[i] = 
+                }
                 resolve(response);
             })
             .catch(error => {
@@ -86,7 +93,7 @@ ClassSchema.statics.AddStudentToClass = (student_id, class_id) => {
                 // now find the student
                 mongoose.model('User').getByUID(student_id)
                     .then(student_response => {
-                        class_instance.students.push(student_response);
+                        class_instance.students.push(student_response._id);
                         class_instance.save()
                         resolve(class_instance)
                     })
@@ -100,6 +107,37 @@ ClassSchema.statics.AddStudentToClass = (student_id, class_id) => {
             })
     })
 }
+
+// method to delete a user by the UID
+ClassSchema.statics.DeleteClass = (UID) => {
+    return new Promise((resolve, reject) => {
+        mongoose.model('Class').findByIdAndDelete(UID)
+            .then(response => {
+                console.log("Successful! Repsonse => ", response);
+                resolve(response);
+            })
+            .catch(error => {
+                console.error("Error! => ", error);
+                reject(error);
+            })
+    })
+}
+
+// method to update by the UID
+ClassSchema.statics.UpdateClass = (UID, data) => {
+    return new Promise((resolve, reject) => {
+        mongoose.model('Class').findByIdAndUpdate(UID, data)
+            .then(response => {
+                console.log("Successful! Repsonse => ", response);
+                resolve(response);
+            })
+            .catch(error => {
+                console.error("Error! => ", error);
+                reject(error);
+            })
+    })
+}
+
 
 var Class = mongoose.model('Class', ClassSchema);
 module.exports = Class;

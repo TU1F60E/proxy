@@ -8,8 +8,11 @@ var ClassRouter = express.Router();
 // we can also have parametric URLs
 ClassRouter
     .get("/", views.getAllClasses)
-    .get("/:id", views.getOneClass)
     .post("/", views.createClass)
+    .get("/:class_id", views.getOneClass)
+    .patch("/:class_id", views.UpdateClass)
+    .delete("/:class_id", views.DeleteClass)
+    .post("/:class_id/add/:student_id", views.AddUserToClass) //
 
 // make this router available to the outer world
 module.exports = ClassRouter;

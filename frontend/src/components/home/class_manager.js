@@ -1,36 +1,59 @@
-import Modal from '../utils/modal.js'
-import Hero from '../utils/hero.jsx';
-import ClassCreator from './classcreator'
 import { useState, useEffect } from 'react';
-import DataGrid from 'react-data-grid';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
+import Modal from '../utils/modal.js'
+import Hero from '../utils/hero.jsx';
+import ClassCreator from './classcreator'
+import ClassUpdater from './class_updator.js'
+import ClassDeleter from './class_deleter.jsx'
+import ClassStudentUtils from './class_student_utils'
+
+import ClassTableView from '../utils/class_table.jsx';
+
 export default function ClassManager(props) {
 
-  var [users, setUsers] = useState();
+  var [classes, setClasses] = useState();
+  var [students, setStudents] = useState();
   var [error, setError] = useState([]);
   
-  // grid setup
-  const columns = [ 
-    {key: '_id', name: 'ID'},
-    {key: 'created', name: 'Created At'},
-    {key: 'name', name: 'Name'},
-  ]
-
   useEffect(() => {
-    // fetch data on component render
-    axios.get("http://localhost:8000/classes/")
-      .then(response => {
-        // console.log(response);
-        console.log("fetching data...");
-        setUsers(response.data);
-      })
-      .catch(error => {
-        setUsers([]);
-        setError(error);
-      })
+    fetchClasses();
+    fetchStudents();
   }, [])
+
+  function fetchClasses() {
+      // fetch data on component render
+      axios.get("http://localhost:8000/classes/")
+        .then(response => {
+          // console.log(response);
+          console.log("fetching data...");
+          setClasses(response.data);
+        })
+        .catch(error => {
+          setClasses([]);
+          setError(error);
+        })
+  }
+
+  function fetchStudents() {
+      // fetch data on component render
+      axios.get("http://localhost:8000/users/")
+        .then(response => {
+          // console.log(response);
+          console.log("fetching data...");
+          setStudents(response.data);
+        })
+        .catch(error => {
+          setStudents([]);
+          setError(error);
+        })
+  }
+
+  function refresh() {
+    fetchStudents();
+    fetchClasses();
+  }
 
   return <>
     <Hero title="Classes" className="border border-green-500">
@@ -60,25 +83,42 @@ export default function ClassManager(props) {
               {
                   // class update/deletion logic goes here
               }
-              <p> hello, modal! </p>
+              <ClassUpdater classes={classes}/>
           </Modal>
+
+
+            <Modal 
+              classname="p-3 m-3 flex-grow w-full" 
+              buttonName="Add A Student to a class" 
+              title="Add a Student to a Class" 
+              header_icon="home" 
+              button_icon="pluscircle"
+            >
+              {
+                  // class update/deletion logic goes here
+              }
+            <ClassStudentUtils classes={classes} students={students} />
+          </Modal>
+
+          <Modal 
+            classname="p-3 m-3 flex-grow w-full" 
+            buttonName="Delete a Class" 
+            title="Delete a Class" 
+            header_icon="home" 
+            button_icon="pluscircle"
+          >
+            {
+                // class update/deletion logic goes here
+            }
+          <ClassDeleter classes={classes}/>
+        </Modal>
+
+          <button className="std_btn" onClick={refresh}> Refresh </button>
 
         </div>
 
         <br/>
-
-        {
-          // this sucks man
-          // least convenient way of adding comments
-        }
-
-        {users && 
-          <DataGrid columns={columns} rows={users} className="w-full m-3"/>
-        }
-        {!users && 
-          <h3> Could not find users :( </h3>
-        }
-
+        <ClassTableView students={classes} />
     </Hero>
   </>
 }
